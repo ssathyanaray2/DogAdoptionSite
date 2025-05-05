@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Container, TextField, Button, Typography, Grid, CircularProgress, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import PawIcon from '@mui/icons-material/Pets';
-import './LoginPage.css'; 
 
 function LoginPage() {
   const [email, setEmail] = useState('');

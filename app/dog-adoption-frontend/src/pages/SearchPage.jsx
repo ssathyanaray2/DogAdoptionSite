@@ -11,8 +11,8 @@ function SearchPage() {
     zip: '',
     ageMin: '',
     ageMax: '',
-    sort: '',
-    sortDirection: '',
+    sort: 'breed',
+    sortDirection: 'asc',
   });
 
   const [dogs, setDogs] = useState([]);
@@ -44,7 +44,7 @@ function SearchPage() {
     if (isSearchMode) {
       searchDogs();
     }
-  }, [page]);
+  }, [page, isSearchMode]);
 
   useEffect(() => {
     const stored = localStorage.getItem('favorites');
@@ -61,7 +61,7 @@ function SearchPage() {
       zip: '',
       ageMin: '',
       ageMax: '',
-      sort: '',
+      sort: 'breed',
       sortDirection: 'asc',
     });
     setPage(0);
@@ -83,6 +83,7 @@ function SearchPage() {
       setDogs(dogsData);
     } else {
       alert('No favorites to show');
+      window.location.reload();
     }
   };
 
@@ -111,7 +112,7 @@ function SearchPage() {
       setDogs(dogsData);
     } else {
       alert('No favorites to match');
-      clearFilters();
+      window.location.reload();
     }
   };
 
@@ -137,6 +138,7 @@ function SearchPage() {
         }
       });
 
+      console.log(`https://frontend-take-home-service.fetch.com/dogs/search?${queryParams.toString()}`)
       const searchRes = await fetch(`https://frontend-take-home-service.fetch.com/dogs/search?${queryParams.toString()}`, {
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
